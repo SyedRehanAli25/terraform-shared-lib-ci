@@ -1,6 +1,7 @@
-def call(Map params) {
-    def path = params.path
-    echo "Running terraform validate in ${path}"
-    sh "terraform -chdir=${path} validate"
+def call(Map args) {
+    if (!args.path) {
+        error "Please provide 'path' to terraformValidate"
+    }
+    echo "Running terraform validate in ${args.path}"
+    sh "terraform -chdir=${args.path} validate"
 }
-
